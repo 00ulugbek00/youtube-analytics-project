@@ -19,9 +19,39 @@ class Channel:
         self.video_count = self.channel['items'][0]['statistics']['videoCount']
         self.viewCount = self.channel['items'][0]['statistics']['viewCount']
 
+    def __str__(self) -> str:
+        return f'{self.title} ({self.url})'
+
+    def __eq__(self, other) -> bool:
         """
-        Экземпляр инициализируется id канала. Дальше все данные будут подтягиваться по API.
+        Проверяет, равен ли данный объект Channel
         """
+
+        return self.subscriberCount == other.self.subscriberCount
+
+    def __lt__(self, other) -> bool:
+        """
+        Проверяет, является ли данный объект Channel меньшим
+        """
+        return self.subscriberCount < other.self.subscriberCount
+
+    def __add__(self, other) -> int:
+        """
+        Складывает количество подписчиков данного объекта Channel"""
+        return self.subscriberCount + other.self.subscriberCount
+
+    def __rsub__(self, other) -> int:
+        """
+        Вычитает количество подписчиков данного объекта Channel
+        """
+        return other.self.subscriberCount - self.subscriberCount
+
+    def __sub__(self, other) -> int:
+        """
+        Вычитает количество подписчиков другого объекта Channel
+        """
+        return self.subscriberCount - other.self.subscriberCount
+
     @classmethod
     def get_service(cls):
         return build('youtube', 'v3', developerKey=cls.api_key)
