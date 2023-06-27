@@ -15,7 +15,7 @@ class Channel:
         self.title = self.channel['items'][0]['snippet']['title']
         self.description = self.channel['items'][0]['snippet']['description']
         self.url = f'https://www.youtube.com/channel/{self.channel_id}'
-        self.subscriberCount = self.channel['items'][0]['statistics']['subscriberCount']
+        self.subscriberCount = int(self.channel['items'][0]['statistics']['subscriberCount'])
         self.video_count = self.channel['items'][0]['statistics']['videoCount']
         self.viewCount = self.channel['items'][0]['statistics']['viewCount']
 
@@ -27,18 +27,33 @@ class Channel:
         Проверяет, равен ли данный объект Channel
         """
 
-        return self.subscriberCount == other.self.subscriberCount
+        return self.subscriberCount == other.subscriberCount
+
+    def __le__(self, other) -> bool:
+        """__le__(self, other) — определяет поведение оператора сравнения «меньше или равно», <=.
+         """
+        return self.subscriberCount <= other.subscriberCount
+
+    def __ge__(self, other) -> bool:
+        """  __ge__(self, other) — определяет поведение оператора сравнения «больше или равно», >=.
+        """
+        return self.subscriberCount >= other.subscriberCount
+
+    def __gt__(self, other) -> bool:
+        """__gt__(self, other) — определяет поведение оператора сравнения «больше», >.
+        """
+        return self.subscriberCount > other.subscriberCount
 
     def __lt__(self, other) -> bool:
         """
         Проверяет, является ли данный объект Channel меньшим
         """
-        return self.subscriberCount < other.self.subscriberCount
+        return self.subscriberCount < other.subscriberCount
 
     def __add__(self, other) -> int:
         """
         Складывает количество подписчиков данного объекта Channel"""
-        return self.subscriberCount + other.self.subscriberCount
+        return self.subscriberCount + other.subscriberCount
 
     def __rsub__(self, other) -> int:
         """
@@ -50,7 +65,7 @@ class Channel:
         """
         Вычитает количество подписчиков другого объекта Channel
         """
-        return self.subscriberCount - other.self.subscriberCount
+        return self.subscriberCount - other.subscriberCount
 
     @classmethod
     def get_service(cls):
