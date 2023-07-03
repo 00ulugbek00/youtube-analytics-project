@@ -1,5 +1,10 @@
 from src.channel import Channel
 
+# id видео
+# название видео
+# ссылка на видео
+# количество просмотров
+# количество лайков
 if __name__ == '__main__':
     moscowpython = Channel('UC-OVMPlMA3-YCIeg4z5z23A')
 
